@@ -1,0 +1,26 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_style = space
+indent_size = 2
+
+# Place the opening brace on the same line (Allman -> K&R)
+# which means that we're using K&R (Kernighan & Ritchie) style,
+# instead of normal Allman (or BSD) style
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_open_brace_types = none
+csharp_new_line_before_open_brace_methods = none
+csharp_new_line_before_open_brace_properties = none
+csharp_new_line_before_open_brace_accessors = none
+csharp_new_line_before_open_brace_anonymous_methods = none
+csharp_new_line_before_open_brace_control_blocks = none
+csharp_new_line_before_open_brace_lambdas = none
