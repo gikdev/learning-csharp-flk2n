@@ -1,8 +1,18 @@
+using DotNetApi.Data;
+using DotNetApi.Dtos;
+using DotNetApi.Models;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<DataContextDapper>();
+builder.Services.AddScoped<DataContextEf>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+
+builder.Services.AddAutoMapper(cfg => {
+  cfg.CreateMap<UserToAddDto, User>();
+});
 
 // About configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
