@@ -1,4 +1,4 @@
-namespace Api;
+namespace Api.Auth;
 
 public class AuthConstants {
   public const string AdminUserPolicyName = "Admin";

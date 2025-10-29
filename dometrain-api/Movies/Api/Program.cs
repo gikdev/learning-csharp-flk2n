@@ -1,5 +1,5 @@
 using System.Text;
-using Api;
+using Api.Auth;
 using Api.Mapping;
 using App;
 using App.Db;
