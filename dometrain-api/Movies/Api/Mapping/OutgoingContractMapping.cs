@@ -8,6 +8,7 @@ public static class OutgoingContractMapping {
     var res = new MovieRes {
       Id = movie.Id,
       Title = movie.Title,
+      Slug = movie.Slug,
       YearOfRelease = movie.YearOfRelease,
       Genres = movie.Genres,
     };
