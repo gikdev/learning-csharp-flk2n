@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+###############################
+### Request: POST /api/movies
+### Summary: Create a movie
+###############################
+
+
+POST {{baseUrl}}/api/movies
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4Mjk0OGY4NS1hNjhkLTQxMmUtOGQ4My0zNDI1NzA5YWM3MGMiLCJzdWIiOiJtZUBtZS5tZSIsImVtYWlsIjoibWVAbWUubWUiLCJ1c2VyaWQiOiIxMjNlNDU2Ny1lODliLTEyZDMtYTQ1Ni00MjY2MTQxNzQwMDAiLCJhZG1pbiI6ZmFsc2UsInRydXN0ZWRNZW1iZXIiOnRydWUsIm5iZiI6MTc2MTc0Njg4MSwiZXhwIjoxNzYxNzc1NjgxLCJpYXQiOjE3NjE3NDY4ODEsImlzcyI6Imh0dHBzOi8vaWQubmlja2NoYXBzYXMuY29tIiwiYXVkIjoiaHR0cHM6Ly9tb3ZpZXMubmlja2NoYXBzYXMuY29tIn0.vkmmYob5ND4RJjv2_UYeVSgODRSzfh6bRD7Ey_Fu6t4
+
+{
+  "title": "title",
+  "yearOfRelease": 0,
+  "genres": [
+    ""
+  ]
+}
+

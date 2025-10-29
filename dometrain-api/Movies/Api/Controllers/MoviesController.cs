@@ -1,8 +1,9 @@
 using Api.Mapping;
 using App.Models;
-using App.Repos;
 using App.Services;
 using Contracts.Requests;
+using Contracts.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -11,9 +12,10 @@ namespace Api.Controllers;
 public class MoviesController(IMovieService movieService) : ControllerBase {
   private readonly IMovieService _movieService = movieService;
 
+  [Authorize(AuthConstants.TrustedMemberPolicyName)]
   [EndpointSummary("Create a movie")]
   [HttpPost(ApiEndpoints.Movies.Create)]
-  public async Task<IActionResult> Create([FromBody] CreateMoveReq req, CancellationToken token) {
+  public async Task<ActionResult<MovieRes>> Create([FromBody] CreateMoveReq req, CancellationToken token) {
     var movie = new Movie {
       Id = Guid.NewGuid(),
       Title = req.Title,
@@ -28,7 +30,7 @@ public class MoviesController(IMovieService movieService) : ControllerBase {
 
   [EndpointSummary("Get a movie")]
   [HttpGet(ApiEndpoints.Movies.Get)]
-  public async Task<IActionResult> Get([FromRoute] string idOrSlug, CancellationToken token) {
+  public async Task<ActionResult<MovieRes>> Get([FromRoute] string idOrSlug, CancellationToken token) {
     Movie? movie;
 
     if (Guid.TryParse(idOrSlug, out var id)) {
@@ -47,7 +49,7 @@ public class MoviesController(IMovieService movieService) : ControllerBase {
 
   [EndpointSummary("Get all movies")]
   [HttpGet(ApiEndpoints.Movies.GetAll)]
-  public async Task<IActionResult> GetAll(CancellationToken token) {
+  public async Task<ActionResult<MoviesRes>> GetAll(CancellationToken token) {
     var movies = await _movieService.GetAllAsync(token);
 
     var res = movies.MapToResponse();
@@ -55,9 +57,10 @@ public class MoviesController(IMovieService movieService) : ControllerBase {
     return Ok(res);
   }
 
+  [Authorize(AuthConstants.TrustedMemberPolicyName)]
   [EndpointSummary("Update a movie")]
   [HttpPut(ApiEndpoints.Movies.Update)]
-  public async Task<IActionResult> Update(
+  public async Task<ActionResult<MovieRes>> Update(
     [FromRoute] Guid id,
     [FromBody] UpdateMoveReq req,
     CancellationToken token
@@ -72,6 +75,7 @@ public class MoviesController(IMovieService movieService) : ControllerBase {
     return Ok(res);
   }
 
+  [Authorize(AuthConstants.AdminUserPolicyName)]
   [EndpointSummary("Delete a movie")]
   [HttpDelete(ApiEndpoints.Movies.Delete)]
   public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token) {

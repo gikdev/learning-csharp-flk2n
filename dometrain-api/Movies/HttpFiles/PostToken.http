@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+#################################
+### Request: POST /token
+### Summary: Generate JWT token
+#################################
+
+
+POST {{baseUrl}}/token
+Content-Type: {{contentType}}
+
+{
+  "userId": "123e4567-e89b-12d3-a456-426614174000",
+  "email": "me@me.me",
+  "customClaims": {
+    "admin": true,
+    "trustedMember": false
+  }
+}
+

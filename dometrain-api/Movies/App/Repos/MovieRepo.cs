@@ -165,9 +165,9 @@ public class MovieRepo(IDbConnectionFactory dbConnectionFactory) : IMovieRepo {
 
     var deleteMovieCmd = new CommandDefinition("""
       DELETE
-      FORM movies
+      FROM movies
       WHERE id = @id
-    """, cancellationToken: token);
+    """, new { id }, cancellationToken: token);
 
     var result = await conn.ExecuteAsync(deleteMovieCmd);
 

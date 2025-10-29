@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+###################################
+### Request: PUT /api/movies/{id}
+### Summary: Update a movie
+###################################
+
+### Path Parameter: id
+@id = 123e4567-e89b-12d3-a456-426614174000
+
+
+PUT {{baseUrl}}/api/movies/{{id}}
+Content-Type: {{contentType}}
+
+{
+  "title": "title",
+  "yearOfRelease": 0,
+  "genres": [
+    ""
+  ]
+}
+

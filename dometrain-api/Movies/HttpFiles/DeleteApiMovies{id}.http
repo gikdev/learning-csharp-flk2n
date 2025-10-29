@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+######################################
+### Request: DELETE /api/movies/{id}
+### Summary: Delete a movie
+######################################
+
+### Path Parameter: id
+@id = 861745f4-d440-43aa-9a5c-9c9477ea298e
+
+
+DELETE {{baseUrl}}/api/movies/{{id}}
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYWQxZjBmMi0xZDdkLTQxYzctYThjZC02ZjI5NzQ2ZTY4MzAiLCJzdWIiOiJtZUBtZS5tZSIsImVtYWlsIjoibWVAbWUubWUiLCJ1c2VyaWQiOiIxMjNlNDU2Ny1lODliLTEyZDMtYTQ1Ni00MjY2MTQxNzQwMDAiLCJhZG1pbiI6dHJ1ZSwidHJ1c3RlZE1lbWJlciI6ZmFsc2UsIm5iZiI6MTc2MTc0NjkzMSwiZXhwIjoxNzYxNzc1NzMxLCJpYXQiOjE3NjE3NDY5MzEsImlzcyI6Imh0dHBzOi8vaWQubmlja2NoYXBzYXMuY29tIiwiYXVkIjoiaHR0cHM6Ly9tb3ZpZXMubmlja2NoYXBzYXMuY29tIn0.Upcll1kBjPgYzxrJXMRGv7CcTyryIVS2jZTeq8f3jjw
+
+

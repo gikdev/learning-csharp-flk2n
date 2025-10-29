@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+##############################
+### Request: GET /api/movies
+### Summary: Get all movies
+##############################
+
+
+GET {{baseUrl}}/api/movies
+Content-Type: {{contentType}}
+
+

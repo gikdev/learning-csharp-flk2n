@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:5023
+@contentType = application/json
+
+#########################################
+### Request: GET /api/movies/{idOrSlug}
+### Summary: Get a movie
+#########################################
+
+### Path Parameter: idOrSlug
+@idOrSlug = nick-the-greek-2023
+
+
+GET {{baseUrl}}/api/movies/{{idOrSlug}}
+Content-Type: {{contentType}}
+
+
