@@ -1,13 +1,13 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using Contracts.Requests;
 using Contracts.Responses;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Api.Controllers;
+namespace Api.Controllers.V1;
 
 [ApiController]
 public class IdentityController : ControllerBase {

@@ -17,10 +17,6 @@ indent_size = 2
 # which means that we're using K&R (Kernighan & Ritchie) style,
 # instead of normal Allman (or BSD) style
 csharp_new_line_before_open_brace = none
-# csharp_new_line_before_open_brace_types = none              # Says not supported
-# csharp_new_line_before_open_brace_methods = none            # Says not supported
-# csharp_new_line_before_open_brace_properties = none         # Says not supported
-# csharp_new_line_before_open_brace_accessors = none          # Says not supported
-# csharp_new_line_before_open_brace_anonymous_methods = none  # Says not supported
-# csharp_new_line_before_open_brace_control_blocks = none     # Says not supported
-# csharp_new_line_before_open_brace_lambdas = none            # Says not supported
+# csharp_preserve_single_line_statements = false
+# csharp_preserve_single_line_blocks = false
+resharper_csharp_place_attribute_on_same_line = never

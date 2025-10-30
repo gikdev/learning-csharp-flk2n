@@ -18,9 +18,12 @@ public static class OutgoingContractMapping {
     return res;
   }
 
-  public static MoviesRes MapToResponse(this IEnumerable<Movie> movies) {
+  public static MoviesRes MapToResponse(this IEnumerable<Movie> movies, int page, int pageSize, int total) {
     var res = new MoviesRes {
-      Items = movies.Select(MapToResponse)
+      Items = movies.Select(MapToResponse),
+      Page = page,
+      PageSize = pageSize,
+      Total = total,
     };
 
     return res;

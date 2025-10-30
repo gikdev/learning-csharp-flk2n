@@ -1,6 +1,6 @@
 namespace Contracts.Responses;
 
-public class MovieRes {
+public class MovieRes : HalRes {
   public required Guid Id { get; init; }
   public required string Title { get; init; }
   public required string Slug { get; init; }
