@@ -58,7 +58,9 @@ app.UseAuthorization();
 app.UseMiddleware<ValidationMappingMiddleware>();
 app.MapControllers();
 app.MapOpenApi();
-app.MapScalarApiReference(o => o.WithClassicLayout());
+app.MapScalarApiReference(
+  // o => o.WithClassicLayout()
+);
 
 var dbInitializer = app.Services.GetRequiredService<DbInitializer>();
 await dbInitializer.InitializeAsync();

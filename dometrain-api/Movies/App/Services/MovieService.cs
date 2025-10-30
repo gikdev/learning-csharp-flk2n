@@ -4,9 +4,14 @@ using FluentValidation;
 
 namespace App.Services;
 
-public class MovieService(IMovieRepo movieRepo, IValidator<Movie> movieValidator) : IMovieService {
+public class MovieService(
+  IMovieRepo movieRepo,
+  IValidator<Movie> movieValidator,
+  IRatingRepo ratingRepo
+  ) : IMovieService {
   private readonly IMovieRepo _movieRepo = movieRepo;
   private readonly IValidator<Movie> _movieValidator = movieValidator;
+  private readonly IRatingRepo _ratingRepo = ratingRepo;
 
   public async Task<bool> CreateAsync(Movie movie, CancellationToken token = default) {
     await _movieValidator.ValidateAndThrowAsync(movie, cancellationToken: token);
@@ -24,8 +29,17 @@ public class MovieService(IMovieRepo movieRepo, IValidator<Movie> movieValidator
     var movieExists = await _movieRepo.ExistsByIdAsync(movie.Id, token);
     if (!movieExists) return null;
 
-    await _movieRepo.UpdateAsync(movie, userId, token);
+    await _movieRepo.UpdateAsync(movie, token);
 
+    if (!userId.HasValue) {
+      var rating = await _ratingRepo.GetRatingAsync(movie.Id, token);
+      movie.Rating = rating;
+      return movie;
+    }
+
+    var (Rating, UserRating) = await _ratingRepo.GetRatingAsync(movie.Id, userId.Value, token);
+    movie.Rating = Rating;
+    movie.UserRating = UserRating;
     return movie;
   }
 

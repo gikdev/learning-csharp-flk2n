@@ -33,7 +33,7 @@ public class DbInitializer(IDbConnectionFactory dbConnectionFactory) {
     await conn.ExecuteAsync("""
       CREATE TABLE IF NOT EXISTS ratings (
         userid UUID,
-        moveid UUID REFERENCES movies (id),
+        movieid UUID REFERENCES movies (id),
         rating INTEGER NOT NULL,
         PRIMARY KEY (userid, movieid)
       );

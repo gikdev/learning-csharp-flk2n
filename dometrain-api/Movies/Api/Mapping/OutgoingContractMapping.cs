@@ -9,6 +9,8 @@ public static class OutgoingContractMapping {
       Id = movie.Id,
       Title = movie.Title,
       Slug = movie.Slug,
+      Rating = movie.Rating,
+      UserRating = movie.UserRating,
       YearOfRelease = movie.YearOfRelease,
       Genres = movie.Genres,
     };
@@ -20,6 +22,16 @@ public static class OutgoingContractMapping {
     var res = new MoviesRes {
       Items = movies.Select(MapToResponse)
     };
+
+    return res;
+  }
+
+  public static IEnumerable<MovieRatingRes> MapToResponse(this IEnumerable<MovieRating> ratings) {
+    var res = ratings.Select(r => new MovieRatingRes {
+      Rating = r.Rating,
+      MovieId = r.MovieId,
+      Slug = r.Slug,
+    });
 
     return res;
   }
