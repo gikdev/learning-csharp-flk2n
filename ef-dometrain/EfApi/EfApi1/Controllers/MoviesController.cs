@@ -15,7 +15,7 @@ public class MoviesController(MoviesContext db) : ControllerBase {
 
     await db.SaveChangesAsync();
 
-    return CreatedAtAction(nameof(Get), new { id = movie.Id }, movie);
+    return CreatedAtAction(nameof(Get), new { id = movie.Identifier }, movie);
   }
 
   [HttpGet]
@@ -26,11 +26,25 @@ public class MoviesController(MoviesContext db) : ControllerBase {
     return Ok(result);
   }
 
+  [HttpGet("until-age/{ageRating}")]
+  [ProducesResponseType(typeof(List<MovieTitle>), StatusCodes.Status200OK)]
+  public async Task<IActionResult> GetAllUntilAge([FromRoute] AgeRating ageRating) {
+    var filteredTitles = await db.Movies
+      .Where(m => m.AgeRating <= ageRating)
+      .Select(m => new MovieTitle { Id = m.Identifier, Title = m.Title })
+      .ToListAsync();
+
+    return Ok(filteredTitles);
+  }
+
+
   [HttpGet("by-year/{year:int}")]
   [ProducesResponseType(typeof(List<Movie>), StatusCodes.Status200OK)]
   public async Task<IActionResult> GetAllByYear([FromRoute] int year) {
-    var filteredMovies = await db.Movies.Where(m => m.ReleaseDate.Year == year)
-      .Select(m => new MovieTitle { Id = m.Id, Title = m.Title }).ToListAsync();
+    var filteredMovies = await db.Movies
+      .Where(m => m.ReleaseDate.Year == year)
+      .Select(m => new MovieTitle { Id = m.Identifier, Title = m.Title })
+      .ToListAsync();
 
     return Ok(filteredMovies);
   }
@@ -40,8 +54,10 @@ public class MoviesController(MoviesContext db) : ControllerBase {
   [ProducesResponseType(StatusCodes.Status404NotFound)]
   public async Task<IActionResult> Get(int id) {
     // var movie = await db.Movies.FirstOrDefaultAsync(m => m.Id == id);
-    // var movie = await db.Movies.SingleOrDefaultAsync(m => m.Id == id);
-    var movie = await db.Movies.FindAsync(id);
+    // var movie = await db.Movies.FindAsync(id);
+    var movie = await db.Movies
+      .Include(m => m.Genre)
+      .SingleOrDefaultAsync(m => m.Identifier == id);
 
     return movie == null ? NotFound() : Ok(movie);
   }

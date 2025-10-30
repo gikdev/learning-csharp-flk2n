@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
 using EfApi1.Data;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => {
+  options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MoviesContext>();
 

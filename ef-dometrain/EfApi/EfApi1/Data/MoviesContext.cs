@@ -1,4 +1,5 @@
 ﻿using EfApi1.Models;
+using EfApi1.Models.EntityMapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace EfApi1.Data;
@@ -7,10 +8,6 @@ public class MoviesContext : DbContext {
   public DbSet<Movie> Movies => Set<Movie>();
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-    // optionsBuilder.UseSqlServer(
-    //   "Data Source=localhost;Initial Catalog=MoviesDB;User Id=sa;Password=mmsfllfbns;TrustServerCertificate=true;"
-    // );
-
     const string connStr = """
       Data Source=localhost;
       Initial Catalog=MoviesDB;
@@ -24,5 +21,12 @@ public class MoviesContext : DbContext {
     // optionsBuilder.LogTo(Console.WriteLine);
 
     base.OnConfiguring(optionsBuilder);
+  }
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    modelBuilder.ApplyConfiguration(new GenreMapping());
+    modelBuilder.ApplyConfiguration(new MovieMapping());
+
+    base.OnModelCreating(modelBuilder);
   }
 }
